@@ -1,0 +1,38 @@
+﻿@model List<Worker>
+
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+<div class="grid_right">
+    <div class="grid_right__table">
+        <div class="table">
+            <div class="thead">
+                <div class="row">
+                    <div class="cell">Id</div>
+                    <div class="cell">ФИО</div>
+                    <div class="cell">Должность</div>
+                    <div class="cell">Стаж</div>
+                    <div class="cell">Зарплата</div>
+                    <div class="cell">Возраст</div>
+                    <div class="cell">Рейтинг</div>
+                    <div class="cell">Адрес</div>
+                    <div class="cell">Телефон</div>
+                </div>
+            </div>
+            <div class="tbody">
+                @foreach (var mod in Model)
+                {
+                    <div class="row">
+                        <div class="cell">@mod.Id</div>
+                        <div class="cell">@mod.Fullname</div>
+                        <div class="cell">@mod.Funciton</div>
+                        <div class="cell">@mod.Experience</div>
+                        <div class="cell">@mod.Salary</div>
+                        <div class="cell">@mod.Age</div>
+                        <div class="cell">@Math.Round(Convert.ToDouble(mod.Rating), 2)</div>
+                        <div class="cell">@mod.Contacts?.HomeAddress</div>
+                        <div class="cell">@mod.Contacts?.PhoneNumber</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

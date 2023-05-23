@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - PostgresLab</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/PostgresLab.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+</head>
+<body>
+<header>
+    <div class="grid_wrapper">
+        <div class="grid_left">
+            <div class="grid_left__menu">
+                <div class="logo">
+                    <img src="/img/bella.png" alt="logo">
+                </div>
+                <div class="menu">
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
+                    </div>
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
+                    </div>
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
+                    </div>
+                    <div class="menu_block">
+                        <a href="#">Организации</a>
+                    </div>
+                    <div class="menu_block">
+                        <a href="#">Заказы</a>
+                    </div>
+                    <div class="menu_block">
+                        <a href="#">Добавить пользователя</a>
+                    </div>
+                    <div class="menu_block">
+                        <a href="#">Добавить записи в таблицы</a>
+                    </div>
+                    <div class="menu_block">
+                        <a href="#">Выйти из аккаунта</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="grid_header">
+            <div class="search_block">
+                <input type="search" class="search" placeholder="Поиск...">
+                <button>
+                    <img src="/img/bx-search-alt.svg">
+                </button>
+            </div>
+            <div class="profile_block">
+                <div class="profile_block__role">Администратор</div>
+                <div class="profile_block__name">
+                    <img src="/img/user.svg" alt="name_user">
+                    <p>Трофимка</p>
+                </div>
+            </div>
+        </header>
+        @RenderBody()
+    </div>
+</header>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

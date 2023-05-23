@@ -1,0 +1,141 @@
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+@font-face {
+    font-family: 'Gilroy';
+    src: url(font/Gilroy-Regular.ttf) format('ttf');
+    font-weight: 400;
+    font-size: 18px;
+}
+@font-face {
+    font-family: 'Gilroy';
+    src: url(font/Gilroy-Bold.ttf) format('ttf');
+}
+.grid_wrapper {
+    font-size: 18px;
+    display: grid;
+    font-family:Gilroy,Sans-serif,Arial; 
+    grid-template-columns: 410px 1fr;
+    grid-template-rows: 110px 1fr;
+    grid-template-areas: 
+    "menu header"
+    "menu content";
+}
+.grid_left {
+    background-color:#33363D;
+    grid-area: menu;
+    height: 800px;
+}
+.grid_left__menu {
+}
+.logo {
+    text-align: center;
+    margin: 40px 0 35px 0;
+}
+.menu {
+}
+
+.menu_block{
+    background: #33363D;
+    border: 1px solid rgba(150, 185, 255, 0.3);
+    box-sizing: border-box;
+    font-weight: 700;
+    padding: 35px 0 40px 40px;
+    cursor: pointer;
+}
+    .menu_block:hover{
+        background: #4B4E54;
+    }
+    .menu_block:nth-last-child(3){
+        margin-top: 100px;
+    }
+    .menu_block a{
+        color: white;
+        text-decoration: none;
+    }
+.grid_header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 0 45px;
+}
+.search_block {
+    margin: 40px 0 40px 0;
+    display: flex;
+}
+    .search_block button{
+        background-color: white;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+    .search_block button img{
+        width: 40px;
+        height: 40px;
+    }
+.search{
+    width: 620px;
+    height: 40px;
+    margin-right: 20px;
+    border: 1px solid #96B9FF;
+}
+    .search::placeholder{
+        font-family:Gilroy,Sans-serif,Arial; 
+        font-size: 18px;
+        padding-left: 10px;
+    }
+.profile_block {
+    display: flex;
+    align-items: center;
+    margin: 40px 0 40px 0;
+}
+.profile_block__role {
+    font-weight: 700;
+}
+.profile_block__name {
+    display: flex;
+    align-items: center;
+}
+.profile_block__name img{
+    width: 40px;
+    height: 40px;
+    padding: 0 20px;
+}
+.grid_right {
+    grid-area: content;
+}
+.grid_right__table {
+}
+.table {
+    display: inline-table;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    width: 100%;
+}
+.thead {
+    display: table-header-group;
+}
+    .thead>.row{
+        background-color: #CADCFF;
+        font-weight: 700;
+    }
+.row {
+    display: table-row;
+    background: #F2F7FF;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+.cell {
+    display: table-cell;
+    vertical-align: middle;
+    height: 98px;
+    padding: 0 10px;
+}
+.cell:first-child{
+    padding-left: 40px;
+}
+.tbody {
+    display: table-row-group;
+}
