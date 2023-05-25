@@ -1,0 +1,36 @@
+﻿@model List<Organization>
+
+@{
+    ViewData["Area"] = "TableArea";
+}
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+
+<div class="grid_right">
+    <div class="grid_right__table">
+        <div class="table">
+            <div class="thead">
+                <div class="row">
+                    <div class="cell">Id</div>
+                    <div class="cell">Тип организации</div>
+                    <div class="cell">Адрес</div>
+                    <div class="cell">Телефон</div>
+                    <div class="cell">Почтовый индекс</div>
+                    <div class="cell">Количество работников</div>
+                </div>
+            </div>
+            <div class="tbody">
+                @foreach (var mod in Model)
+                {
+                    <div class="row">
+                        <div class="cell">@mod.Id</div>
+                        <div class="cell">@mod.OrgType</div>
+                        <div class="cell">@mod.OrgAddress</div>
+                        <div class="cell">@mod.PhoneNumber</div>
+                        <div class="cell">@mod.PostIndex</div>
+                        <div class="cell">@mod.WorkersCount</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
