@@ -26,7 +26,7 @@
 .grid_left {
     background-color:#33363D;
     grid-area: menu;
-    min-height:800px;
+    min-height:1080px;
 }
 .grid_left__menu {
 }

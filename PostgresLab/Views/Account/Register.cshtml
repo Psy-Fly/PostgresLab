@@ -1,0 +1,25 @@
+﻿@model PostgresLab.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Area"] = "RegisterArea";
+}
+<link rel="stylesheet" href="/css/style.css" asp-append-version="true"/>
+<div class="grid_wrapper">
+    <div class="grid_right">
+        <form method="post" asp-controller="Account" asp-action="Login">
+            <div class="grid_right__form">
+                <div class="form_input">
+                    <div class="input_text">Введите логин</div>
+                    <input asp-for="UserLogin" type="text" class="input" placeholder="логин">
+                    <span asp-validation-for="UserLogin"></span>
+                </div>
+                <div class="form_input">
+                    <div class="input_text">Введите пароль</div>
+                    <input asp-for="UserPassword" type="password" class="input" placeholder="пароль">
+                    <span asp-validation-for="UserPassword"></span>
+                </div>
+                <input type="submit" value="Войти" class="auth_button">
+            </div>
+        </form>
+    </div>
+</div>

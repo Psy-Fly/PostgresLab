@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgresLab.Repositories.Interfaces;
 
-namespace PostgresLab.Repositories;
+namespace PostgresLab.Repositories.Implementations;
 
 public class OrderInfoRepository : IOrderInfoRepository
 {

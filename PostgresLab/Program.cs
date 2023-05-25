@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PostgresLab;
-using PostgresLab.Repositories;
+using PostgresLab.Repositories.Implementations;
 using PostgresLab.Repositories.Interfaces;
+using PostgresLab.Services;
+using PostgresLab.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +14,23 @@ builder.Services.AddControllersWithViews();
 var conneciton = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AcmeDataContext>(o => o.UseNpgsql(conneciton));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+        options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+    });
+
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderInfoRepository, OrderInfoRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+
 
 var app = builder.Build();
 
@@ -37,6 +51,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Table}/{action=Workers}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

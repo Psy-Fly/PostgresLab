@@ -6,9 +6,14 @@ namespace PostgresLab;
 
 public partial class AcmeDataContext : DbContext
 {
+    public AcmeDataContext()
+    {
+    }
+
     public AcmeDataContext(DbContextOptions<AcmeDataContext> options)
         : base(options)
     {
+        
     }
 
     public virtual DbSet<Client> Clients { get; set; }
@@ -25,16 +30,20 @@ public partial class AcmeDataContext : DbContext
 
     public virtual DbSet<Status> Statuses { get; set; }
 
+    public virtual DbSet<UserAccount> UserAccounts { get; set; }
+
     public virtual DbSet<Worker> Workers { get; set; }
 
     public virtual DbSet<WorkerContact> WorkerContacts { get; set; }
 
 //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-//         => optionsBuilder.UseNpgsql("Server=localhost; Database=smd; User id=postgres; Password=1501; Integrated Security=true;");
+//         => optionsBuilder.UseNpgsql("Server=localhost; Database=smd; User Id= postgres; Password = 1501;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresExtension("pgcrypto");
+
         modelBuilder.Entity<Client>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("client_pkey");
@@ -166,6 +175,29 @@ public partial class AcmeDataContext : DbContext
             entity.Property(e => e.StatusName)
                 .HasMaxLength(30)
                 .HasColumnName("status_name");
+        });
+
+        modelBuilder.Entity<UserAccount>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("user_account_pk");
+
+            entity.ToTable("user_account");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.UserLogin)
+                .HasMaxLength(80)
+                .HasColumnName("user_login");
+            entity.Property(e => e.UserPassword)
+                .HasMaxLength(250)
+                .HasColumnName("user_password");
+            entity.Property(e => e.UserRole)
+                .HasMaxLength(80)
+                .HasColumnName("user_role");
+            entity.Property(e => e.WorkerId).HasColumnName("worker_id");
+
+            entity.HasOne(d => d.Worker).WithMany(p => p.UserAccounts)
+                .HasForeignKey(d => d.WorkerId)
+                .HasConstraintName("user_account_worker_id_fk");
         });
 
         modelBuilder.Entity<Worker>(entity =>

@@ -1,10 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using PostgresLab.Services.Interfaces;
 using PostgresLab.ViewModels;
 
 namespace PostgresLab.Controllers;
 
 public class AccountController : Controller
 {
+    private IAccountService accountService;
+
+    public AccountController(IAccountService accountService)
+    {
+        this.accountService = accountService;
+    }
+
     [HttpGet]
     public IActionResult Login()
     {
@@ -14,7 +26,54 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
-        
-        return RedirectToAction("Workers", "Table");
+        if (ModelState.IsValid)
+        {
+            var response = await accountService.Login(model);
+
+            if (response.StatusCode == Services.Enums.StatusCode.OK)
+            {
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(response.Data));
+
+                return RedirectToAction("Workers", "Table");
+            }
+            ModelState.AddModelError("",response.Description);
+        }
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View("Login");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (ModelState.IsValid)
+        {
+            var response = await accountService.Register(model);
+
+            if (response.StatusCode == Services.Enums.StatusCode.OK)
+            {
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(response.Data));
+
+                return RedirectToAction("Workers", "Table");
+            }
+
+            ModelState.AddModelError("", response.Description);
+        }
+
+        return View("Login");
+    }
+
+    [HttpGet]
+    public IActionResult Logout()
+    {
+        HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        return RedirectToAction("Login", "Account");
     }
 }

@@ -18,34 +18,44 @@
                     <img src="/img/bella.png" alt="logo">
                 </div>
                 <div class="menu">
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
-                    </div>
-                    <div class="menu_block">
-                        <a href="#">Добавить пользователя</a>
-                    </div>
-                    <div class="menu_block">
-                        <a href="#">Добавить записи в таблицы</a>
-                    </div>
-                    <div class="menu_block">
-                        <a href="#">Выйти из аккаунта</a>
-                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
+                        </div>
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
+                        </div>
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
+                        </div>
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
+                        </div>
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
+                        </div>
+                        <div class="menu_block">
+                            <a href="#">Добавить пользователя</a>
+                        </div>
+                        <div class="menu_block">
+                            <a href="#">Добавить записи в таблицы</a>
+                        </div>
+
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-        <header class="grid_header">    
+        <header class="grid_header">
             <div class="grid_header__content">
                 @if (ViewData["Area"]?.ToString() == "LoginArea")
                 {
@@ -55,13 +65,16 @@
                 }
                 else
                 {
-                    <div class="profile_block">
-                        <div class="profile_block__role">Администратор</div>
-                        <div class="profile_block__name">
-                            <img src="/img/user.svg" alt="name_user">
-                            <p>Трофимка</p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="profile_block">
+                            <div class="profile_block__role">Администратор</div>
+                            <div class="profile_block__name">
+                                <img src="/img/user.svg" alt="name_user">
+                                <p>Трофимка</p>
+                            </div>
                         </div>
-                    </div>
+                    }
                 }
 
                 @if (ViewData["Area"]?.ToString() == "TableArea")

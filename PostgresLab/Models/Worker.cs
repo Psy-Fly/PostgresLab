@@ -30,4 +30,6 @@ public partial class Worker
     public virtual Organization? Organization { get; set; }
 
     public virtual ICollection<Service> Services { get; set; } = new List<Service>();
+
+    public virtual ICollection<UserAccount> UserAccounts { get; set; } = new List<UserAccount>();
 }

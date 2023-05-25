@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PostgresLab.Helpers;
 using PostgresLab.Repositories;
 using PostgresLab.Repositories.Interfaces;
 using PostgresLab.ViewModels;
@@ -27,7 +28,7 @@ public class TableController : Controller
         this.organizationRepository = organizationRepository;
         this.orderRepository = orderRepository;
         this.orderInfoRepository = orderInfoRepository;
-        ;
+
     }
 
     [HttpGet]

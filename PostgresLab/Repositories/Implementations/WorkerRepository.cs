@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgresLab.Repositories.Interfaces;
 
-namespace PostgresLab.Repositories;
+namespace PostgresLab.Repositories.Implementations;
 
 public class WorkerRepository : IWorkerRepository
 {
@@ -26,5 +26,10 @@ public class WorkerRepository : IWorkerRepository
         var workers = context.Workers.Include(x => x.Contacts).ToList();
         
         return workers;
+    }
+
+    public async Task CreateWorker(Worker worker)
+    {
+         await context.Workers.AddAsync(worker);
     }
 }

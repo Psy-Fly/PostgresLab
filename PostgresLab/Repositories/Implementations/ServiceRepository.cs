@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgresLab.Repositories.Interfaces;
 
-namespace PostgresLab.Repositories;
+namespace PostgresLab.Repositories.Implementations;
 
 public class ServiceRepository : IServiceRepository
 {
@@ -23,6 +23,7 @@ public class ServiceRepository : IServiceRepository
 
     public List<Service> GetServicesList()
     {
+        Console.WriteLine(context.Database.GetConnectionString());
         var services = context.Services
             .Include(x => x.Master).ToList();
 
