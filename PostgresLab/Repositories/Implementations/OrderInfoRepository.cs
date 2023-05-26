@@ -26,27 +26,44 @@ public class OrderInfoRepository : IOrderInfoRepository
 
     public List<OrderInfo> GetOrderInfosList()
     {
-        var oInfo = context.OrderInfos
-            .Include(x => x.Order)
-            .ThenInclude(x => x.Client)
-            .Include(x => x.Service)
-            .ThenInclude(x => x.Master)
-            .ToList();
+        try
+        {
+            var oInfo = context.OrderInfos
+                .Include(x => x.Order)
+                .ThenInclude(x => x.Client)
+                .Include(x => x.Service)
+                .ThenInclude(x => x.Master)
+                .ToList();
 
+            return oInfo;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
 
-        return oInfo;
+        return new List<OrderInfo>();
     }
 
     public List<OrderInfo> GetOrderInfosByOrderId(int id)
     {
-        var oInfo = context.OrderInfos
-            .Include(x => x.Order)
-            .ThenInclude(x => x.Client)
-            .Include(x => x.Service)
-            .ThenInclude(x => x.Master)
-            .Where(x => x.OrderId == id)
-            .ToList();
+        try
+        {
+            var oInfo = context.OrderInfos
+                .Include(x => x.Order)
+                .ThenInclude(x => x.Client)
+                .Include(x => x.Service)
+                .ThenInclude(x => x.Master)
+                .Where(x => x.OrderId == id)
+                .ToList();
 
-        return oInfo;
+            return oInfo;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        return new List<OrderInfo>();
     }
 }

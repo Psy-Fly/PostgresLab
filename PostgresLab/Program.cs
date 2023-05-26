@@ -30,6 +30,8 @@ builder.Services.AddScoped<IOrderInfoRepository, OrderInfoRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+builder.Services.AddSingleton<ConnectionSingleton>();
+
 
 
 var app = builder.Build();

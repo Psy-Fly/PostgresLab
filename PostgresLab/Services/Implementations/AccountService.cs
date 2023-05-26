@@ -17,13 +17,15 @@ public class AccountService : IAccountService
     private HashPasswordHelper passwordHelper;
     private AcmeDataContext context;
     private IConfiguration configuration;
+    private ConnectionSingleton connectionSingleton;
 
-    public AccountService(IWorkerRepository workerRepository, AcmeDataContext context, IUserRepository userRepository, IConfiguration configuration)
+    public AccountService(IWorkerRepository workerRepository, AcmeDataContext context, IUserRepository userRepository, IConfiguration configuration, ConnectionSingleton connectionSingleton)
     {
         this.workerRepository = workerRepository;
         this.context = context;
         this.userRepository = userRepository;
         this.configuration = configuration;
+        this.connectionSingleton = connectionSingleton;
         passwordHelper = new HashPasswordHelper();
     }
 
@@ -106,6 +108,8 @@ public class AccountService : IAccountService
                     Description = "Неверный пароль!"
                 };
             }
+            
+            connectionSingleton.ChangeConnectionUser(model.Login, model.Password);
             
             var result = Authenticate(user);
             return new BaseResponce.BaseResponse<ClaimsIdentity>()

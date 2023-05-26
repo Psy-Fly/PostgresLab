@@ -11,10 +11,12 @@ namespace PostgresLab.Controllers;
 public class AccountController : Controller
 {
     private IAccountService accountService;
+    private ConnectionSingleton connectionSingleton;
 
-    public AccountController(IAccountService accountService)
+    public AccountController(IAccountService accountService, ConnectionSingleton connectionSingleton)
     {
         this.accountService = accountService;
+        this.connectionSingleton = connectionSingleton;
     }
 
     [HttpGet]
@@ -73,6 +75,7 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Logout()
     {
+        connectionSingleton.ChangeConnectionUser("postgres", "1501");
         HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return RedirectToAction("Login", "Account");
     }

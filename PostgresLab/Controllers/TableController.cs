@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PostgresLab.Helpers;
 using PostgresLab.Repositories;
@@ -7,6 +8,7 @@ using PostgresLab.ViewModels;
 
 namespace PostgresLab.Controllers;
 
+[Authorize]
 public class TableController : Controller
 {
     private AcmeDataContext context;
@@ -17,8 +19,9 @@ public class TableController : Controller
     private IOrderRepository orderRepository;
     private IOrderInfoRepository orderInfoRepository;
     private readonly IConfiguration configuration;
+    private ConnectionSingleton connectionSingleton;
 
-    public TableController(AcmeDataContext context, IConfiguration configuration, IWorkerRepository workerRepository, IClientRepository clientRepository, IServiceRepository serviceRepository, IOrganizationRepository organizationRepository, IOrderRepository orderRepository, IOrderInfoRepository orderInfoRepository)
+    public TableController(AcmeDataContext context, IConfiguration configuration, IWorkerRepository workerRepository, IClientRepository clientRepository, IServiceRepository serviceRepository, IOrganizationRepository organizationRepository, IOrderRepository orderRepository, IOrderInfoRepository orderInfoRepository, ConnectionSingleton connectionSingleton)
     {
         this.context = context;
         this.configuration = configuration;
@@ -28,7 +31,7 @@ public class TableController : Controller
         this.organizationRepository = organizationRepository;
         this.orderRepository = orderRepository;
         this.orderInfoRepository = orderInfoRepository;
-
+        this.connectionSingleton = connectionSingleton;
     }
 
     [HttpGet]

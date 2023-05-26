@@ -21,27 +21,29 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
-                        </div>
-                        <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
                         </div>
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
                         </div>
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
-                        </div>
-                        <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
                         </div>
-                        <div class="menu_block">
-                            <a href="#">Добавить пользователя</a>
-                        </div>
-                        <div class="menu_block">
-                            <a href="#">Добавить записи в таблицы</a>
-                        </div>
-
+                        @if (User.IsInRole("admin"))
+                        {
+                            <div class="menu_block">
+                                <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
+                            </div>
+                            <div class="menu_block">
+                                <a asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
+                            </div>
+                            <div class="menu_block">
+                                <a href="#">Добавить пользователя</a>
+                            </div>
+                            <div class="menu_block">
+                                <a href="#">Добавить записи в таблицы</a>
+                            </div>
+                        }
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
                         </div>
