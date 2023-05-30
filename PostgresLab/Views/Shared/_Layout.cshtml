@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
 </head>
 <body>
-<header>
     <div class="grid_wrapper">
         <div class="grid_left">
             <div class="grid_left__menu">
@@ -50,22 +49,20 @@
                     }
                     else
                     {
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
-                        </div>
+                        <img src="img/text.png" alt="auth_image" class="auth_image">
                     }
                 </div>
             </div>
         </div>
         <header class="grid_header">
+            @if (ViewData["Area"]?.ToString() == "LoginArea")
+            {
+                <div class="grid_header__auth">
+                    <p>Авторизация</p>
+                </div>
+            }
             <div class="grid_header__content">
-                @if (ViewData["Area"]?.ToString() == "LoginArea")
-                {
-                    <div class="grid_header__auth">
-                        <p>Авторизация</p>
-                    </div>
-                }
-                else
+                @if (ViewData["Area"]?.ToString() != "LoginArea")
                 {
                     @if (User.Identity.IsAuthenticated)
                     {
@@ -92,7 +89,7 @@
         </header>
         @RenderBody()
     </div>
-</header>
+
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
