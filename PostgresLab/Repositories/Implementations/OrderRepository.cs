@@ -12,11 +12,11 @@ public class OrderRepository : IOrderRepository
     {
         this.context = context;
         this.connectionSingleton = connectionSingleton;
+        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
     }
 
     public Order GetOrderById(int id)
     {
-        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
         var ord = context.Orders
             .Include(x => x.Client)
             .Include(x => x.OrderInfos)
@@ -29,7 +29,6 @@ public class OrderRepository : IOrderRepository
     {
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
             var ord = context.Orders
                 .Include(x => x.Client)
                 .Include(x => x.OrderInfos)
@@ -43,5 +42,11 @@ public class OrderRepository : IOrderRepository
         }
 
         return new List<Order>();
+    }
+
+    public void CreateOrder(Order order)
+    {
+        context.Orders.Add(order);
+        context.SaveChangesAsync();
     }
 }

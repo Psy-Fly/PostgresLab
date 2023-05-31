@@ -48,7 +48,7 @@ public class AccountController : Controller
     [HttpGet]
     public IActionResult Register()
     {
-        return View("Login");
+        return View();
     }
 
     [HttpPost]
@@ -69,7 +69,7 @@ public class AccountController : Controller
             ModelState.AddModelError("", response.Description);
         }
 
-        return View("Login");
+        return View(model);
     }
 
     [HttpGet]
