@@ -19,29 +19,15 @@
                 <div class="menu">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
-                        </div>
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
-                        </div>
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
-                        </div>
+                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
+                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
+                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
                         @if (User.IsInRole("admin"))
                         {
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
-                            </div>
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
-                            </div>
-                            <div class="menu_block">
-                                <a href="#">Добавить пользователя</a>
-                            </div>
-                            <div class="menu_block">
-                                <a href="#">Добавить записи в таблицы</a>
-                            </div>
+                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
+                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
+                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="addUsers">Добавить пользователя</a>
+                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="addRows">Добавить записи в таблицы</a>
                         }
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
@@ -70,7 +56,7 @@
                             <div class="profile_block__role">Администратор</div>
                             <div class="profile_block__name">
                                 <img src="/img/user.svg" alt="name_user">
-                                <p>Трофимка</p>
+                                <div>Трофимка</div>
                             </div>
                         </div>
                     }
