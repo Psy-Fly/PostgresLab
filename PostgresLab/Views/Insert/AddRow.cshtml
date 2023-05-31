@@ -1,0 +1,77 @@
+﻿@model PostgresLab.ViewModels.InsertViewModel
+@{
+    ViewData["Area"] = "AddRowArea";
+}
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+
+<div class="grid_right">
+    <h3 class="grid_right__title">Добавление записей в таблицы</h3>
+    <div class="grid_right__addForm">
+        <div class="grid_right__form">
+            <h3>Таблица «Клиенты»</h3>
+            <form method="post" asp-controller="Insert" asp-action="AddRow">
+                <input type="hidden" name="form" value="clients" />
+                <div class="form_add__input">
+                    <input asp-for="Client.Fullname" type="text" placeholder="фио">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="Client.Contacts.HomeAddress" type="text" placeholder="адрес">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="Client.Contacts.PhoneNumber" type="text" placeholder="телефон">
+                </div>
+                <div class="form_add__submit">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+        <div class="grid_right__form">
+            <h3>Таблица «Услуги»</h3>
+            <form method="post" asp-controller="Insert" asp-action="AddRow">
+                <input type="hidden" name="form" value="services" />
+                <div class="form_add__input">
+                    <input asp-for="Service.ServiceName" type="text" placeholder="название услуги">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="Service.Price" type="number" min="0" placeholder="цена">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="Service.MasterId" type="number" min="0" placeholder="id мастера">
+                </div>
+                <div class="form_add__submit">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+        <div class="grid_right__form">
+            <h3>Таблица «Заказы»</h3>
+            <form method="post" asp-controller="Insert" asp-action="AddRow">
+                <input type="hidden" name="form" value="orders" />
+                <div class="form_add__input">
+                    <input asp-for="Order.ClientId" type="number" min="0" placeholder="id клиента">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="Order.OrderDate" type="date" placeholder="дата заказа">
+                </div>
+                <div class="form_add__submit">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+        <div class="grid_right__form">
+            <h3>Таблица «Информация о заказе»</h3>
+            <form method="post" asp-controller="Insert" asp-action="AddRow">
+                <input type="hidden" name="form" value="order_infos" />
+                <div class="form_add__input">
+                    <input asp-for="OrderInfo.OrderId"type="text" placeholder="id заказа">
+                </div>
+                <div class="form_add__input">
+                    <input asp-for="OrderInfo.ServiceId" type="text" placeholder="id услуги">
+                </div>
+                <div class="form_add__submit">
+                    <input type="submit" value="Добавить">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

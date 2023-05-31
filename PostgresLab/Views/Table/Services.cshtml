@@ -10,6 +10,7 @@
         <div class="table">
             <div class="thead">
                 <div class="row">
+                    <div class="cell">Id</div>
                     <div class="cell">Название сервиса</div>
                     <div class="cell">Цена</div>
                     <div class="cell">Мастер</div>
@@ -19,6 +20,7 @@
                 @foreach (var mod in Model)
                 {
                     <div class="row">
+                        <div class="cell">@mod.Id</div>
                         <div class="cell">@mod.ServiceName</div>
                         <div class="cell">@mod.Price</div>
                         <div class="cell">@mod.Master.Fullname</div>

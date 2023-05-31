@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PostgresLab;
 
-public partial class Client
+public partial class Client 
 {
     public int Id { get; set; }
 

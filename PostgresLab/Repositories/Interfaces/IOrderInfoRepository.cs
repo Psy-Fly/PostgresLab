@@ -7,4 +7,6 @@ public interface IOrderInfoRepository
 
     List<OrderInfo> GetOrderInfosList();
     List<OrderInfo> GetOrderInfosByOrderId(int id);
+
+    void CreateOrderInfo(OrderInfo orderInfo);
 }

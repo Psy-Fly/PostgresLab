@@ -1,0 +1,28 @@
+﻿@model ClientContact
+
+@{
+    ViewData["Area"] = "TableArea";
+}
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+
+<div class="grid_right">
+    <div class="grid_right__table">
+        <div class="table">
+            <div class="thead">
+                <div class="row">
+                    <div class="cell">Id</div>
+                    <div class="cell">Адрес</div>
+                    <div class="cell">Телефон</div>
+                </div>
+            </div>
+            <div class="tbody">
+                <div class="row">
+                        <div class="cell">@Model.Id</div>
+                        <div class="cell">@Model.HomeAddress</div>
+                        <div class="cell">@Model.PhoneNumber</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

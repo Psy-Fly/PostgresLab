@@ -3,21 +3,51 @@
 @{
     ViewData["Area"] = "RegisterArea";
 }
-<link rel="stylesheet" href="/css/style.css" asp-append-version="true"/>
+<link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
+
 <div class="grid_right">
-    <form method="post" asp-controller="Account" asp-action="Login">
-        <div class="grid_right__form">
-            <div class="form_input">
-                <div class="input_text">Введите логин</div>
-                <input asp-for="UserLogin" type="text" class="input" placeholder="логин">
-                <span asp-validation-for="UserLogin"></span>
+    <div class="grid_right__form">
+        <h3>Добавление нового пользователя</h3>
+        <form method="post" asp-controller="Account" asp-action="Register">
+            <div class="form_add__input">
+                <input asp-for="Fullname" type="text" placeholder="фио">
             </div>
-            <div class="form_input">
-                <div class="input_text">Введите пароль</div>
-                <input asp-for="UserPassword" type="password" class="input" placeholder="пароль">
-                <span asp-validation-for="UserPassword"></span>
+            <div class="form_add__input">
+                <input asp-for="Experience" type="number" min="0" placeholder="стаж">
             </div>
-            <input type="submit" value="Войти" class="auth_button">
-        </div>
-    </form>
+            <div class="form_add__input">
+                <input asp-for="Salary" type="number" min="0" placeholder="зарплата">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="Age" type="number" min="14" placeholder="возраст">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="Contacts.PhoneNumber" type="number" placeholder="телефон">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="Contacts.HomeAddress" type="text" placeholder="адрес">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="OrganizationId" type="number" min="0" placeholder="номер организации">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="UserLogin" type="text" placeholder="логин">
+            </div>
+            <div class="form_add__input">
+                <input asp-for="UserPassword" type="text" placeholder="пароль">
+            </div>
+            <div class="form_add__input">
+                <select asp-for="UserRole">
+                    <option>worker_role</option>
+                    <option>manager_role</option>
+                </select>
+            </div>
+            <div class="form_add__submit">
+                <input type="submit" value="Добавить">
+            </div>
+            <div class="form_add__input">
+                <p>Пользователь успешно добавлен!</p>
+            </div>
+        </form>
+    </div>
 </div>

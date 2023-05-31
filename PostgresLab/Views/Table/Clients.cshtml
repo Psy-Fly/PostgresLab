@@ -10,6 +10,7 @@
         <div class="table">
             <div class="thead">
                 <div class="row">
+                    <div class="cell">Id</div>
                     <div class="cell">ФИО</div>
                     <div class="cell">Телефон</div>
                 </div>
@@ -18,8 +19,12 @@
                 @foreach (var mod in Model)
                 {
                     <div class="row">
+                        <div class="cell">@mod.Id</div>
                         <div class="cell">@mod.Fullname</div>
-                        <div class="cell">@mod.ContactsId</div>
+                        <form method="post" asp-controller="Table" asp-action="ClientContacts" style="padding-top: 20px">
+                            <input type="hidden" name="contactsId" value=@mod.ContactsId>
+                            <input type="submit" value="Контакты">
+                        </form>
                     </div>
                 }
             </div>

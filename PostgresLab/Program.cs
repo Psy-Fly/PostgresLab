@@ -4,6 +4,7 @@ using PostgresLab;
 using PostgresLab.Repositories.Implementations;
 using PostgresLab.Repositories.Interfaces;
 using PostgresLab.Services;
+using PostgresLab.Services.Implementations;
 using PostgresLab.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderInfoRepository, OrderInfoRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IClientContactsRepository, ClientContactsRepository>();
 
 builder.Services.AddSingleton<ConnectionSingleton>();
 

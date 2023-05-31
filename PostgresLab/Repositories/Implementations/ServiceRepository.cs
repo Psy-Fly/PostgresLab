@@ -12,11 +12,12 @@ public class ServiceRepository : IServiceRepository
     {
         this.context = context;
         this.connectionSingleton = connectionSingleton;
+        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
     }
 
     public Service GetServiceById(int id)
     {
-        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
+
         var service = context.Services
             .Include(x => x.Master)
             .FirstOrDefault(x => x.Id == id);
@@ -28,8 +29,6 @@ public class ServiceRepository : IServiceRepository
     {
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
-            Console.WriteLine(context.Database.GetConnectionString());
             var services = context.Services
                 .Include(x => x.Master).ToList();
             return services;
@@ -40,5 +39,11 @@ public class ServiceRepository : IServiceRepository
         }
 
         return new List<Service>();
+    }
+
+    public void CreateService(Service service)
+    {
+        context.Services.Add(service);
+        context.SaveChangesAsync();
     }
 }

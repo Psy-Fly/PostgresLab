@@ -8,10 +8,7 @@ public class RegisterViewModel
     public string? Fullname { get; set; }
 
     [Required]
-    public string? Funciton { get; set; }
-
-    [Required]
-    public int? ContactsId { get; set; }
+    public WorkerContact Contacts { get; set; }
 
     [Required]
     public int? Experience { get; set; }
@@ -25,8 +22,7 @@ public class RegisterViewModel
     [Required]
     public int? OrganizationId { get; set; }
 
-    [Required]
-    public double? Rating { get; set; }
+    [Required] public double? Rating { get; set; } = 0;
 
     [Required]
     public string? UserLogin { get; set; }
