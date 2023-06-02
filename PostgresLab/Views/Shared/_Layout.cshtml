@@ -21,28 +21,17 @@
                                                         || User.IsInRole("admin")))
 
                 {
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
-                    </div>
-                    <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
-                    </div>
+                    <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
+                    <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
+                    <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
                     @if (User.IsInRole("admin"))
                     {
-                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Clients">Клиенты</a>
-                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Services">Услуги</a>
-                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Orders">Заказы</a>
-                        @if (User.IsInRole("admin"))
-                        {
-                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
-                            <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
-                            <a class="menu_block" asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
-                            <a class="menu_block" asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
-                        }
+                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Workers">Сотрудники</a>
+                        <a class="menu_block" asp-area="" asp-controller="Table" asp-action="Organizations">Организации</a>
+                        <a class="menu_block" asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
+                        <a class="menu_block" asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
                     }
+
                     <div class="menu_block">
                         <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
                     </div>
