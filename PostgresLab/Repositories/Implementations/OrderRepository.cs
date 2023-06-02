@@ -49,4 +49,17 @@ public class OrderRepository : IOrderRepository
         context.Orders.Add(order);
         context.SaveChangesAsync();
     }
+
+    public void DeleteOrderById(int id)
+    {
+        var order = context.Orders.Find(id);
+        context.Orders.Remove(order);
+        context.SaveChanges();
+    }
+
+    public void DeleteOrdersRange(List<Order> orders)
+    {
+        context.RemoveRange(orders);
+        context.SaveChanges();
+    }
 }

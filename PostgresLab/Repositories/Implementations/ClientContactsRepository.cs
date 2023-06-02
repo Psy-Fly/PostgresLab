@@ -40,4 +40,11 @@ public class ClientContactsRepository : IClientContactsRepository
 
         return entry;
     }
+
+    public void DeleteContactById(int id)
+    {
+        var contact = context.ClientContacts.Find(id);
+        context.ClientContacts.Remove(contact);
+        context.SaveChanges();
+    }
 }

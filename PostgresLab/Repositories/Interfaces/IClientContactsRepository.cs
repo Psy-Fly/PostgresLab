@@ -6,4 +6,5 @@ public interface IClientContactsRepository
 {
     List<ClientContact> GetClientContactsList();
     EntityEntry<ClientContact> CreateClientContact(ClientContact contact);
+    void DeleteContactById(int id);
 }

@@ -21,6 +21,7 @@ public class InsertController : Controller
         this.clientContactsRepository = clientContactsRepository;
     }
 
+    [HttpGet]
     public IActionResult AddRow()
     {
         return View();

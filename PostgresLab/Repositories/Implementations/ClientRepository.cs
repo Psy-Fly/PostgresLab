@@ -45,9 +45,16 @@ public class ClientRepository : IClientRepository
 
     }
 
-    public void CreateClient(Client client)
+    public async void CreateClient(Client client)
     {
         context.Clients.Add(client);
-        context.SaveChangesAsync();
+        await context.SaveChangesAsync();
+    }
+
+    public  void DeleteClientById(int id)
+    {
+        var client = context.Clients.Find(id);
+        context.Clients.Remove(client);
+        context.SaveChanges();
     }
 }

@@ -9,4 +9,7 @@ public interface IOrderInfoRepository
     List<OrderInfo> GetOrderInfosByOrderId(int id);
 
     void CreateOrderInfo(OrderInfo orderInfo);
+
+    void DeleteOrderInfoById(int id);
+    void DeleteOrderInfosRange(List<OrderInfo> infos);
 }

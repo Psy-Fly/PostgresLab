@@ -25,24 +25,27 @@
                 </div>
             </form>
         </div>
-        <div class="grid_right__form">
-            <h3>Таблица «Услуги»</h3>
-            <form method="post" asp-controller="Insert" asp-action="AddRow">
-                <input type="hidden" name="form" value="services" />
-                <div class="form_add__input">
-                    <input asp-for="Service.ServiceName" type="text" placeholder="название услуги">
-                </div>
-                <div class="form_add__input">
-                    <input asp-for="Service.Price" type="number" min="0" placeholder="цена">
-                </div>
-                <div class="form_add__input">
-                    <input asp-for="Service.MasterId" type="number" min="0" placeholder="id мастера">
-                </div>
-                <div class="form_add__submit">
-                    <input type="submit" value="Добавить">
-                </div>
-            </form>
-        </div>
+        @if (User.IsInRole("admin"))
+        {
+            <div class="grid_right__form">
+                <h3>Таблица «Услуги»</h3>
+                <form method="post" asp-controller="Insert" asp-action="AddRow">
+                    <input type="hidden" name="form" value="services" />
+                    <div class="form_add__input">
+                        <input asp-for="Service.ServiceName" type="text" placeholder="название услуги">
+                    </div>
+                    <div class="form_add__input">
+                        <input asp-for="Service.Price" type="number" min="0" placeholder="цена">
+                    </div>
+                    <div class="form_add__input">
+                        <input asp-for="Service.MasterId" type="number" min="0" placeholder="id мастера">
+                    </div>
+                    <div class="form_add__submit">
+                        <input type="submit" value="Добавить">
+                    </div>
+                </form>
+            </div>
+        }
         <div class="grid_right__form">
             <h3>Таблица «Заказы»</h3>
             <form method="post" asp-controller="Insert" asp-action="AddRow">

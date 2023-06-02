@@ -75,4 +75,18 @@ public class OrderInfoRepository : IOrderInfoRepository
         context.OrderInfos.Add(orderInfo);
         context.SaveChangesAsync();
     }
+    
+    public  void DeleteOrderInfoById(int id)
+    {
+        var orderInfo = context.OrderInfos.Find(id);
+        context.OrderInfos.Remove(orderInfo);
+        context.SaveChanges();
+    }
+
+
+    public void DeleteOrderInfosRange(List<OrderInfo> infos)
+    {
+        context.OrderInfos.RemoveRange(infos);
+        context.SaveChanges();
+    }
 }

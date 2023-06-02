@@ -7,4 +7,6 @@ public interface IOrderRepository
     List<Order> GetOrdersList();
 
     void CreateOrder(Order order);
+    void DeleteOrderById(int id);
+    void DeleteOrdersRange(List<Order> orders);
 }
