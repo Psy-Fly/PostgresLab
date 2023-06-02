@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using PostgresLab.Helpers;
 using PostgresLab.Repositories;
 using PostgresLab.Repositories.Interfaces;
@@ -48,6 +49,13 @@ public class TableController : Controller
     {
         var clients = clientRepository.GetClientsList();
         return View(clients);
+    }
+    
+    [HttpPost]
+    public IActionResult ClientsSearch(string search)
+    {
+        var clients = clientRepository.GetClientsList().Where(x => x.Fullname.Contains(search)).ToList();
+        return View("Clients", clients);
     }
 
     [HttpPost]
