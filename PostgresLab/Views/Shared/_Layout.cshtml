@@ -22,13 +22,11 @@
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Clients">
                                 <p>Клиенты</p>
-                                <button class="button_report">Выгрузить отчёт</button>
                             </a>
                         </div>
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Services">
                                 <p>Услуги</p>
-                                <button class="button_report">Выгрузить отчёт</button>
                             </a>
                         </div>
                         <div class="menu_block">
@@ -49,15 +47,14 @@
                             <div class="menu_block">
                                 <a asp-area="" asp-controller="Table" asp-action="Organizations">
                                     <p>Организации</p>
-                                    <button class="button_report">Выгрузить отчёт</button>
                                 </a>
                             </div>
 
                             <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="addUsers">Добавить пользователя</a>
+                                <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
                             </div>
                             <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="addRows">Добавить записи в таблицы</a>
+                                <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
                             </div>
                         }
                         <div class="menu_block">
