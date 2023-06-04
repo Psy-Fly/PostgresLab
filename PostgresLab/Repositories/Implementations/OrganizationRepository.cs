@@ -12,13 +12,13 @@ public class OrganizationRepository : IOrganizationRepository
     {
         this.context = context;
         this.connectionSingleton = connectionSingleton;
+        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
     }
 
     public Organization GetOrganizationById(int id)
     {
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
             var org = context.Organizations.FirstOrDefault(x => x.Id == id);
             return org;
         }
@@ -34,7 +34,6 @@ public class OrganizationRepository : IOrganizationRepository
     {
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
             var org = context.Organizations.ToList();
             return org;
         }

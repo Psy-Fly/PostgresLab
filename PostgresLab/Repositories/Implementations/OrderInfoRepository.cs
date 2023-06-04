@@ -6,10 +6,13 @@ namespace PostgresLab.Repositories.Implementations;
 public class OrderInfoRepository : IOrderInfoRepository
 {
     private AcmeDataContext context;
+    private ConnectionSingleton connectionSingleton;
 
-    public OrderInfoRepository(AcmeDataContext context)
+    public OrderInfoRepository(AcmeDataContext context, ConnectionSingleton connectionSingleton)
     {
         this.context = context;
+        this.connectionSingleton = connectionSingleton;
+        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
     }
 
     public OrderInfo GetOrderInfoById(int id)
@@ -65,5 +68,25 @@ public class OrderInfoRepository : IOrderInfoRepository
         }
 
         return new List<OrderInfo>();
+    }
+
+    public void CreateOrderInfo(OrderInfo orderInfo)
+    {
+        context.OrderInfos.Add(orderInfo);
+        context.SaveChangesAsync();
+    }
+    
+    public  void DeleteOrderInfoById(int id)
+    {
+        var orderInfo = context.OrderInfos.Find(id);
+        context.OrderInfos.Remove(orderInfo);
+        context.SaveChanges();
+    }
+
+
+    public void DeleteOrderInfosRange(List<OrderInfo> infos)
+    {
+        context.OrderInfos.RemoveRange(infos);
+        context.SaveChanges();
     }
 }
