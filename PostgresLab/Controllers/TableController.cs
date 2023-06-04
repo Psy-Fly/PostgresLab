@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using PostgresLab.Helpers;
 using PostgresLab.Repositories;
 using PostgresLab.Repositories.Interfaces;
@@ -18,10 +19,11 @@ public class TableController : Controller
     private IOrganizationRepository organizationRepository;
     private IOrderRepository orderRepository;
     private IOrderInfoRepository orderInfoRepository;
+    private IClientContactsRepository clientContactsRepository;
     private readonly IConfiguration configuration;
     private ConnectionSingleton connectionSingleton;
 
-    public TableController(AcmeDataContext context, IConfiguration configuration, IWorkerRepository workerRepository, IClientRepository clientRepository, IServiceRepository serviceRepository, IOrganizationRepository organizationRepository, IOrderRepository orderRepository, IOrderInfoRepository orderInfoRepository, ConnectionSingleton connectionSingleton)
+    public TableController(AcmeDataContext context, IConfiguration configuration, IWorkerRepository workerRepository, IClientRepository clientRepository, IServiceRepository serviceRepository, IOrganizationRepository organizationRepository, IOrderRepository orderRepository, IOrderInfoRepository orderInfoRepository, ConnectionSingleton connectionSingleton, IClientContactsRepository clientContactsRepository)
     {
         this.context = context;
         this.configuration = configuration;
@@ -32,6 +34,7 @@ public class TableController : Controller
         this.orderRepository = orderRepository;
         this.orderInfoRepository = orderInfoRepository;
         this.connectionSingleton = connectionSingleton;
+        this.clientContactsRepository = clientContactsRepository;
     }
 
     [HttpGet]
@@ -46,6 +49,20 @@ public class TableController : Controller
     {
         var clients = clientRepository.GetClientsList();
         return View(clients);
+    }
+    
+    [HttpPost]
+    public IActionResult ClientsSearch(string search)
+    {
+        var clients = clientRepository.GetClientsList().Where(x => x.Fullname.Contains(search)).ToList();
+        return View("Clients", clients);
+    }
+
+    [HttpPost]
+    public IActionResult ClientContacts(int contactsId)
+    {
+        var contact = clientContactsRepository.GetClientContactsList().FirstOrDefault(x => x.Id == contactsId);   
+        return View(contact);
     }
     
     [HttpGet]

@@ -19,7 +19,6 @@ public class WorkerRepository : IWorkerRepository
 
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
             var worker = context.Workers.Include(x => x.Contacts)
                 .Include(x => x.Organization)
                 .FirstOrDefault(x => x.WorkerLogin == login);
@@ -37,7 +36,6 @@ public class WorkerRepository : IWorkerRepository
     {
         try
         {
-            context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
             var workers = context.Workers.Include(x => x.Contacts).ToList();
             return workers;
         }
@@ -51,7 +49,7 @@ public class WorkerRepository : IWorkerRepository
 
     public async Task CreateWorker(Worker worker)
     {
-        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
         await context.Workers.AddAsync(worker);
+        await context.SaveChangesAsync();
     }
 }
