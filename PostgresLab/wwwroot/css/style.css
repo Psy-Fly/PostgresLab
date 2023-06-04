@@ -32,7 +32,7 @@
 }
 .logo {
     text-align: center;
-    margin: 46px 0 35px 0;
+    margin: 41px 0 35px 0;
 }
 .auth_image{
     width:410px;
@@ -41,6 +41,8 @@
     color: white;
     text-decoration: none;
     width:100%;
+    display:flex;
+    justify-content:space-between;
 }
 .menu_block {
     display: block;
@@ -48,13 +50,23 @@
     border: 1px solid rgba(150, 185, 255, 0.3);
     box-sizing: border-box;
     font-weight: 700;
-    padding: 35px 0 40px 40px;
+    padding: 38px;
     cursor: pointer;
 }
     .menu_block:hover{
         background: #4B4E54;
     }
-
+        .menu_block:hover .button_report {
+            opacity: 1;
+            cursor: copy;
+        }
+.button_report {
+    font-weight: 700;
+    background-color: #CADCFF;
+    padding: 0 10px;
+    cursor: pointer;
+    opacity: 0;
+}
 .grid_header {
     grid-area: header;
     padding: 0 20px 0 45px;
