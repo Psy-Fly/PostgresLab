@@ -30,7 +30,7 @@
                             </a>
                         </div>
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Orders">
+                            <a asp-area="" asp-controller="Report" asp-action="OrderReport">
                                 <p>Заказы</p>
                                 <button class="button_report">Выгрузить отчёт</button>
                             </a>
@@ -38,7 +38,7 @@
                         @if (User.IsInRole("admin"))
                         {
                             <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="Workers">
+                                <a asp-area="" asp-controller="Report" asp-action="ClientReport">
                                     <p>Сотрудники</p>
                                     <button class="button_report">Выгрузить отчёт</button>
                                 </a>
