@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
@@ -53,10 +54,12 @@
                             <div class="menu_block">
                                 <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
                             </div>
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
-                            </div>
+                            
                         }
+                        
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
+                        </div>
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
                         </div>
@@ -81,7 +84,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="profile_block">
-                        <div class="profile_block__role">Администратор</div>
+                        <div class="profile_block__role">@User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).ToString().Substring(62)</div>
                         <div class="profile_block__name">
                             <img src="/img/user.svg" alt="name_user">
                             <p>@User.Identity.Name</p>
@@ -94,7 +97,7 @@
             {
                 <div class="search_block">
                     <form method="post" asp-controller="Table" asp-action="ClientsSearch">
-                        <input type="search" class="search" name="search" placeholder="Поиск...">
+                        <input type="search" class="search" name="search" placeholder="Поиск по клиентам...">
                         <button name="submit">
                             <img src="/img/bx-search-alt.svg">
                         </button>

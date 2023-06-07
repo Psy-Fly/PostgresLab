@@ -52,10 +52,15 @@ public class TableController : Controller
     }
     
     [HttpPost]
-    public IActionResult ClientsSearch(string search)
+    public IActionResult ClientsSearch(string? search)
     {
-        var clients = clientRepository.GetClientsList().Where(x => x.Fullname.Contains(search)).ToList();
-        return View("Clients", clients);
+        if (search != null)
+        {
+            var clients = clientRepository.GetClientsList().Where(x => x.Fullname.Contains(search)).ToList();
+            return View("Clients", clients);
+        }
+
+        return RedirectToAction("Clients", "Table");
     }
 
     [HttpPost]
