@@ -22,6 +22,7 @@
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Clients">
                                 <p>Клиенты</p>
+                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="ClientReport">Выгрузить отчёт</a>
                             </a>
                         </div>
                         <div class="menu_block">
@@ -32,15 +33,14 @@
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Orders">
                                 <p>Заказы</p>
-                                <button class="button_report">Выгрузить отчёт</button>
+                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="OrderReport">Выгрузить отчёт</a>
                             </a>
                         </div>
                         @if (User.IsInRole("admin"))
                         {
                             <div class="menu_block">
                                 <a asp-area="" asp-controller="Table" asp-action="Workers">
-                                    <p>Сотрудники</p>
-                                    <button class="button_report">Выгрузить отчёт</button>
+                                    <p>Сотрудники</p>>
                                 </a>
                             </div>
                             
