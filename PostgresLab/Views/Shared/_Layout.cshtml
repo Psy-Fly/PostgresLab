@@ -22,42 +22,39 @@
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Clients">
                                 <p>Клиенты</p>
-                                <button class="button_report">Выгрузить отчёт</button>
+                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="ClientReport">Выгрузить отчёт</a>
                             </a>
                         </div>
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Services">
                                 <p>Услуги</p>
-                                <button class="button_report">Выгрузить отчёт</button>
                             </a>
                         </div>
                         <div class="menu_block">
                             <a asp-area="" asp-controller="Table" asp-action="Orders">
                                 <p>Заказы</p>
-                                <button class="button_report">Выгрузить отчёт</button>
+                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="OrderReport">Выгрузить отчёт</a>
                             </a>
                         </div>
                         @if (User.IsInRole("admin"))
                         {
                             <div class="menu_block">
                                 <a asp-area="" asp-controller="Table" asp-action="Workers">
-                                    <p>Сотрудники</p>
-                                    <button class="button_report">Выгрузить отчёт</button>
+                                    <p>Сотрудники</p>>
                                 </a>
                             </div>
                             
                             <div class="menu_block">
                                 <a asp-area="" asp-controller="Table" asp-action="Organizations">
                                     <p>Организации</p>
-                                    <button class="button_report">Выгрузить отчёт</button>
                                 </a>
                             </div>
 
                             <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="addUsers">Добавить пользователя</a>
+                                <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
                             </div>
                             <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="addRows">Добавить записи в таблицы</a>
+                                <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
                             </div>
                         }
                         <div class="menu_block">
@@ -68,44 +65,46 @@
                     {
                         <img src="img/text.png" alt="auth_image" class="auth_image">
                     }
-                </div>
             </div>
         </div>
-        <header class="grid_header">
-            @if (ViewData["Area"]?.ToString() == "LoginArea")
+    </div>
+    <header class="grid_header">
+        @if (ViewData["Area"]?.ToString() == "LoginArea")
+        {
+            <div class="grid_header__auth">
+                <p>Авторизация</p>
+            </div>
+        }
+        <div class="grid_header__content">
+            @if (ViewData["Area"]?.ToString() != "LoginArea")
             {
-                <div class="grid_header__auth">
-                    <p>Авторизация</p>
-                </div>
-            }
-            <div class="grid_header__content">
-                @if (ViewData["Area"]?.ToString() != "LoginArea")
+                @if (User.Identity.IsAuthenticated)
                 {
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="profile_block">
-                            <div class="profile_block__role">Администратор</div>
-                            <div class="profile_block__name">
-                                <img src="/img/user.svg" alt="name_user">
-                                <div>Трофимка</div>
-                            </div>
+                    <div class="profile_block">
+                        <div class="profile_block__role">Администратор</div>
+                        <div class="profile_block__name">
+                            <img src="/img/user.svg" alt="name_user">
+                            <p>@User.Identity.Name</p>
                         </div>
-                    }
-                }
-
-                @if (ViewData["Area"]?.ToString() == "TableArea")
-                {
-                    <div class="search_block">
-                        <input type="search" class="search" placeholder="Поиск...">
-                        <button>
-                            <img src="/img/bx-search-alt.svg">
-                        </button>
                     </div>
                 }
-            </div>
-        </header>
-        @RenderBody()
-    </div>
+            }
+
+            @if (ViewData["Area"]?.ToString() == "TableArea")
+            {
+                <div class="search_block">
+                    <form method="post" asp-controller="Table" asp-action="ClientsSearch">
+                        <input type="search" class="search" name="search" placeholder="Поиск...">
+                        <button name="submit">
+                            <img src="/img/bx-search-alt.svg">
+                        </button>
+                    </form>
+                </div>
+            }
+        </div>
+    </header>
+    @RenderBody()
+</div>
 
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

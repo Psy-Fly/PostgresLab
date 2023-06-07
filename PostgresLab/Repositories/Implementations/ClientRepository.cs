@@ -6,10 +6,13 @@ namespace PostgresLab.Repositories.Implementations;
 public class ClientRepository : IClientRepository
 {
     private AcmeDataContext context;
+    private ConnectionSingleton connectionSingleton;
 
-    public ClientRepository(AcmeDataContext context)
+    public ClientRepository(AcmeDataContext context, ConnectionSingleton connectionSingleton)
     {
         this.context = context;
+        this.connectionSingleton = connectionSingleton;
+        context.Database.SetConnectionString(connectionSingleton.GetConnectionString());
     }
 
     public Client GetClientById(int id)
@@ -24,11 +27,34 @@ public class ClientRepository : IClientRepository
 
     public List<Client> GetClientsList()
     {
-        var clients = context.Clients
-            .Include(x => x.Contacts)
-            .Include(x => x.Status)
-            .ToList();
+        try
+        {
+            var clients = context.Clients
+                .Include(x => x.Contacts)
+                .Include(x => x.Status)
+                .ToList();
 
-        return clients;
+            return clients;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+        return new List<Client>();
+
+    }
+
+    public async void CreateClient(Client client)
+    {
+        context.Clients.Add(client);
+        await context.SaveChangesAsync();
+    }
+
+    public  void DeleteClientById(int id)
+    {
+        var client = context.Clients.Find(id);
+        context.Clients.Remove(client);
+        context.SaveChanges();
     }
 }

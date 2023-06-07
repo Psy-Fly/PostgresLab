@@ -8,24 +8,26 @@ using PostgresLab.Services.Enums;
 using PostgresLab.Services.Interfaces;
 using PostgresLab.ViewModels;
 
-namespace PostgresLab.Services;
+namespace PostgresLab.Services.Implementations;
 
 public class AccountService : IAccountService
 {
     private IWorkerRepository workerRepository;
     private IUserRepository userRepository;
+    private IClientContactsRepository clientContactsRepository;
     private HashPasswordHelper passwordHelper;
     private AcmeDataContext context;
     private IConfiguration configuration;
     private ConnectionSingleton connectionSingleton;
 
-    public AccountService(IWorkerRepository workerRepository, AcmeDataContext context, IUserRepository userRepository, IConfiguration configuration, ConnectionSingleton connectionSingleton)
+    public AccountService(IWorkerRepository workerRepository, AcmeDataContext context, IUserRepository userRepository, IConfiguration configuration, ConnectionSingleton connectionSingleton, IClientContactsRepository clientContactsRepository)
     {
         this.workerRepository = workerRepository;
         this.context = context;
         this.userRepository = userRepository;
         this.configuration = configuration;
         this.connectionSingleton = connectionSingleton;
+        this.clientContactsRepository = clientContactsRepository;
         passwordHelper = new HashPasswordHelper();
     }
 
@@ -43,15 +45,19 @@ public class AccountService : IAccountService
                 };
             }
 
+            var cont = context.WorkerContacts.Add(model.Contacts);
+            await context.SaveChangesAsync();
+            
+
             var worker = new Worker()
             {
                 WorkerLogin = model.UserLogin,
                 Age = model.Age,
                 Experience = model.Experience,
                 Fullname = model.Fullname,
-                Funciton = model.Funciton,
+                Funciton = model.UserRole,
                 OrganizationId = model.OrganizationId,
-                ContactsId = model.ContactsId
+                ContactsId = cont.Property(x => x.Id).CurrentValue
             };
 
             var newUser = new UserAccount()
@@ -63,7 +69,7 @@ public class AccountService : IAccountService
             };
             
             await workerRepository.CreateWorker(worker);
-            await userRepository.CreateUser(newUser);
+            await userRepository.CreateUser(newUser, model.UserPassword);
             
             var result = Authenticate(newUser);
 

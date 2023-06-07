@@ -13,4 +13,5 @@ public class ConnectionSingleton
     {
         ConnectionString = $"Server = localhost; Port=5432; Database=smd; User Id={userName}; Password = {pass}";
     }
+    
 }
