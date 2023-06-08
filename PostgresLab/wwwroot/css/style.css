@@ -37,13 +37,6 @@
 .auth_image{
     width:410px;
 }
-.menu a {
-    color: white;
-    text-decoration: none;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-}
 .menu_block {
     display: flex;
     background: #33363D;
@@ -60,13 +53,23 @@
             opacity: 1;
             cursor: copy;
         }
+.menu_block__text {
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
 .button_report {
     font-weight: 700;
     background-color: #CADCFF;
+    text-decoration: none;
     padding: 0 10px;
     cursor: pointer;
     color: #33363D;
     opacity: 0;
+    width: 100%;
 }
 .grid_header {
     grid-area: header;

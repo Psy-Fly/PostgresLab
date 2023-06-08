@@ -21,7 +21,7 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Clients">
+                            <a class="menu_block__text" asp-area="" asp-controller="Table" asp-action="Clients">
                             <p>Клиенты</p>
                             @if (User.IsInRole("admin"))
                             {
@@ -31,12 +31,12 @@
                         </a>
                     </div>
                     <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Services">
+                        <a class="menu_block__text" asp-area="" asp-controller="Table" asp-action="Services">
                             <p>Услуги</p>
                         </a>
                     </div>
                     <div class="menu_block">
-                        <a asp-area="" asp-controller="Table" asp-action="Orders">
+                        <a class="menu_block__text" asp-area="" asp-controller="Table" asp-action="Orders">
                             <p>Заказы</p>
                             @if (User.IsInRole("admin"))
                             {
@@ -47,27 +47,27 @@
                     @if (User.IsInRole("admin"))
                     {
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Workers">
-                                <p>Сотрудники</p>>
+                            <a class="menu_block__text" asp-area="" asp-controller="Table" asp-action="Workers">
+                                <p>Сотрудники</p>
                             </a>
                         </div>
 
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Organizations">
+                            <a class="menu_block__text" asp-area="" asp-controller="Table" asp-action="Organizations">
                                 <p>Организации</p>
                             </a>
                         </div>
 
                         <div class="menu_block">
-                            <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
+                            <a class="menu_block__text" asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
                         </div>
                     }
 
                     <div class="menu_block">
-                        <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
+                        <a class="menu_block__text" asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
                     </div>
                     <div class="menu_block">
-                        <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
+                        <a class="menu_block__text" asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
                     </div>
                 }
                 else
