@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Npgsql;
@@ -23,8 +24,12 @@ public class ReportController : Controller
         using (var connection = new NpgsqlConnection(conString))
         {
             connection.Open();
+            if(!Directory.Exists(@"C:\Users\Public\reports\"))
+                Directory.CreateDirectory("C:\\Users\\Public\\reports\\");
+            
+            var cmd = $"select copy_to_csv('client', 'clients', 'C:\\Users\\Public\\reports\\')";
 
-            using (var command = new NpgsqlCommand("select copy_to_csv('client', 'clientsReport')", connection))
+            using (var command = new NpgsqlCommand(cmd, connection))
             {
                 var x = command.ExecuteNonQuery();
             }
@@ -39,8 +44,12 @@ public class ReportController : Controller
         using (var connection = new NpgsqlConnection(conString))
         {
             connection.Open();
+            if(!Directory.Exists(@"C:\Users\Public\reports\"))
+                Directory.CreateDirectory("C:\\Users\\Public\\reports\\");
+            
+            var cmd = $"select copy_to_csv('\"order\"', 'orders', 'C:\\Users\\Public\\reports\\')";
 
-            using (var command = new NpgsqlCommand("select copy_to_csv('\"order\"', 'orderReport')", connection))
+            using (var command = new NpgsqlCommand(cmd, connection))
             {
                 var x = command.ExecuteNonQuery();
             }
