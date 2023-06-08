@@ -100,7 +100,8 @@ public class TableController : Controller
                 ClientId = order.ClientId,
                 OrderDate = order.OrderDate,
                 Client = order.Client,
-                OrderInfo = orderInfo
+                OrderInfo = orderInfo,
+                SumPrice = order.SumPrice
             };
             models.Add(orderMod);
         }

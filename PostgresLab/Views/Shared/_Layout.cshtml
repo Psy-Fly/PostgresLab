@@ -11,63 +11,69 @@
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true"/>
 </head>
 <body>
-    <div class="grid_wrapper">
-        <div class="grid_left">
-            <div class="grid_left__menu">
-                <div class="logo">
-                    <img src="/img/bella.png" alt="logo">
-                </div>
-                <div class="menu">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Clients">
-                                <p>Клиенты</p>
+<div class="grid_wrapper">
+    <div class="grid_left">
+        <div class="grid_left__menu">
+            <div class="logo">
+                <img src="/img/bella.png" alt="logo">
+            </div>
+            <div class="menu">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Clients">
+                            <p>Клиенты</p>
+                            @if (User.IsInRole("admin"))
+                            {
                                 <a class="button_report" asp-area="" asp-controller="Report" asp-action="ClientReport">Выгрузить отчёт</a>
-                            </a>
-                        </div>
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Services">
-                                <p>Услуги</p>
-                            </a>
-                        </div>
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Table" asp-action="Orders">
-                                <p>Заказы</p>
-                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="OrderReport">Выгрузить отчёт</a>
-                            </a>
-                        </div>
-                        @if (User.IsInRole("admin"))
-                        {
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="Workers">
-                                    <p>Сотрудники</p>>
-                                </a>
-                            </div>
-                            
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Table" asp-action="Organizations">
-                                    <p>Организации</p>
-                                </a>
-                            </div>
+                            }
 
-                            <div class="menu_block">
-                                <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
-                            </div>
-                            
-                        }
-                        
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
-                        </div>
-                        <div class="menu_block">
-                            <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
-                        </div>
-                    }
-                    else
+                        </a>
+                    </div>
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Services">
+                            <p>Услуги</p>
+                        </a>
+                    </div>
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Table" asp-action="Orders">
+                            <p>Заказы</p>
+                            @if (User.IsInRole("admin"))
+                            {
+                                <a class="button_report" asp-area="" asp-controller="Report" asp-action="OrderReport">Выгрузить отчёт</a>
+                            }
+                        </a>
+                    </div>
+                    @if (User.IsInRole("admin"))
                     {
-                        <img src="img/text.png" alt="auth_image" class="auth_image">
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Workers">
+                                <p>Сотрудники</p>>
+                            </a>
+                        </div>
+
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Table" asp-action="Organizations">
+                                <p>Организации</p>
+                            </a>
+                        </div>
+
+                        <div class="menu_block">
+                            <a asp-area="" asp-controller="Account" asp-action="Register">Добавить пользователя</a>
+                        </div>
                     }
+
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Insert" asp-action="AddRow">Добавить записи в таблицы</a>
+                    </div>
+                    <div class="menu_block">
+                        <a asp-area="" asp-controller="Account" asp-action="Logout">Выйти из аккаунта</a>
+                    </div>
+                }
+                else
+                {
+                    <img src="img/text.png" alt="auth_image" class="auth_image">
+                }
             </div>
         </div>
     </div>

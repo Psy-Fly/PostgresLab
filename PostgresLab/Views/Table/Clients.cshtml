@@ -13,7 +13,10 @@
                     <div class="cell">Id</div>
                     <div class="cell">ФИО</div>
                     <div class="cell">Контакты</div>
-                    <div class="cell"></div>
+                    @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                    {
+                        <div class="cell"></div>
+                    }
                 </div>
             </div>
             <div class="tbody">
@@ -26,10 +29,13 @@
                             <input type="hidden" name="contactsId" value=@mod.ContactsId>
                             <input class="butt_more" type="submit" value="Контакты">
                         </form>
-                        <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteClientById" style="padding-top: 20px">
-                            <input type="hidden" name="clientId" value=@mod.Id>
-                            <input class="butt_more" type="submit" value="Удалить">
-                        </form>
+                        @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                        {
+                            <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteClientById" style="padding-top: 20px">
+                                <input type="hidden" name="clientId" value=@mod.Id>
+                                <input class="butt_more" type="submit" value="Удалить">
+                            </form>
+                        }
                     </div>
                 }
             </div>

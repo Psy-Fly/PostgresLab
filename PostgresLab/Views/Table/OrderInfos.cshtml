@@ -14,7 +14,10 @@
                     <div class="cell">Id заказа</div>
                     <div class="cell">Название услуги</div>
                     <div class="cell">Оценка</div>
-                    <div class="cell"></div>
+                    @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                    {
+                        <div class="cell"></div>
+                    }
                 </div>
             </div>
             <div class="tbody">
@@ -25,10 +28,13 @@
                         <div class="cell">@mod.OrderId</div>
                         <div class="cell">@mod.Service?.ServiceName</div>
                         <div class="cell">@mod.Grade</div>
-                        <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteOrderInfo" style="padding-top: 20px">
-                            <input type="hidden" name="orderInfoId" value=@mod.Id>
-                            <input class="butt_more" type="submit" value="Удалить">
-                        </form>
+                        @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                        {
+                            <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteOrderInfo" style="padding-top: 20px">
+                                <input type="hidden" name="orderInfoId" value=@mod.Id>
+                                <input class="butt_more" type="submit" value="Удалить">
+                            </form>
+                        }
                     </div>
                 }
             </div>

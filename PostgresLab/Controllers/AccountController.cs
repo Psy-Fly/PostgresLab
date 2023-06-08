@@ -37,7 +37,7 @@ public class AccountController : Controller
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(response.Data));
 
-                return RedirectToAction("Workers", "Table");
+                return RedirectToAction("Clients", "Table");
             }
             ModelState.AddModelError("",response.Description);
         }
@@ -63,7 +63,7 @@ public class AccountController : Controller
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(response.Data));
 
-                return RedirectToAction("Workers", "Table");
+                return RedirectToAction("Clients", "Table");
             }
 
             ModelState.AddModelError("", response.Description);

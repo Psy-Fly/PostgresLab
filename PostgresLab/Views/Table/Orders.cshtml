@@ -15,7 +15,10 @@
                     <div class="cell">Дата</div>
                     <div class="cell">Общая стоимость</div>
                     <div class="cell">Информация о заказе</div>
-                    <div class="cell"></div>
+                    @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                    {
+                        <div class="cell"></div>
+                    }
                 </div>
             </div>
             <div class="tbody">
@@ -30,10 +33,14 @@
                             <input type="number" name="orderId" value=@mod.OrderId style="display: none">
                             <input class="butt_more" type="submit" value="Подробнее">
                         </form>
-                        <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteOrder" style="padding-top: 20px">
-                            <input type="hidden" name="orderId" value=@mod.OrderId>
-                            <input class="butt_more" type="submit" value="Удалить">
-                        </form>
+                        @if (User.IsInRole("admin") || User.IsInRole("manager_role"))
+                        {
+                            <form class="cell" method="post" asp-controller="Delete" asp-action="DeleteOrder" style="padding-top: 20px">
+                                <input type="hidden" name="orderId" value=@mod.OrderId>
+                                <input class="butt_more" type="submit" value="Удалить">
+                            </form>
+                        }
+                        
                     </div>
                 }
             </div>
