@@ -9,6 +9,7 @@ public class OrderViewModel
     public DateOnly? OrderDate { get; set; }
 
     public double? SumPrice { get; set; }
+    
 
     public virtual Client? Client { get; set; }
     
